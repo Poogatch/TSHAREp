@@ -8,10 +8,10 @@ import { simpleContractAddress } from "../contracts"
 const humanReadableAbi = [
     "constructor(string internalType, string name, string address)",
     "function claimDividend()",
-    "function getUnpaidEarnings(string internalType, string name, string address) view returns (uint earnings)"
+    "function getUnpaidEarnings(string address) view returns (uint earnings)"
   ];
 
-const dividendDistributorInterface = new ethers.utils.Interface(humanReadableAbi);
+const dividendDistributorInterface = new ethers.utils.Interface(dividendDistributorAbi);
 const contract = new Contract(simpleContractAddress, dividendDistributorInterface);
 
   export function useClaimDividend() {
@@ -20,11 +20,7 @@ const contract = new Contract(simpleContractAddress, dividendDistributorInterfac
 }
 
 export function useCheckEarnings(address : string | false | 0 | null | undefined) {
-    const [earnings]: any = useContractCall({
-      abi: dividendDistributorInterface,
-      address: simpleContractAddress,
-      method: "getUnpaidEarnings",
-      args: [address],
-    }) ?? [];
-    return earnings;
+  const { state, send } = useContractFunction(contract, "getUnpaidEarnings", {});
+    send({ value: address });
+    return state;
   }

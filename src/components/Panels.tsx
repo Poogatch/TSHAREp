@@ -56,7 +56,8 @@ import {
   
   export default function BasicStatistics() {
     const { account } = useEthers()
-    const earnings = useCheckEarnings(account);
+    var earnings = '0';
+    const checkEarnings = useCheckEarnings(account);
     return (
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         <chakra.h1
@@ -70,7 +71,7 @@ import {
           <Panel
             title={'Pending rewards'}
 
-            stat={earnings}
+            stat={checkEarnings.status}
             icon={<Claim />}
           />
           <Panel
