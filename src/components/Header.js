@@ -6,7 +6,8 @@ import {
   Flex,
   Text,
   Button,
-  useDisclosure
+  useDisclosure,
+  Link
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import ConnectButton from "./ConnectButton";
@@ -51,9 +52,7 @@ const Header = (props) => {
         flexGrow={1}
         mt={{ base: 4, md: 0 }}
       >
-        <Text>Home</Text>
-        <Text>Chart</Text>
-        <Text>Dashboard</Text>
+        <Link to = "https://dexscreener.com/fantom/0x6f4b0b5f4be32ebc03c02a8f3a0a54fa4270136d">Chart</Link>
       </Stack>
 
       <Box

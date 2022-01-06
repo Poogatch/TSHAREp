@@ -21,11 +21,10 @@ import {
   
   interface PanelProps {
     title: string;
-    stat: string;
-    icon: ReactNode;
+    stat: ReactNode;
   }
   function Panel(props: PanelProps) {
-    const { title, stat, icon } = props;
+    const { title, stat } = props;
     return (
       <Stat
         px={{ base: 2, md: 4 }}
@@ -47,7 +46,6 @@ import {
             my={'auto'}
             color={useColorModeValue('gray.800', 'gray.200')}
             alignContent={'center'}>
-            {icon}
           </Box>
         </Flex>
       </Stat>
@@ -71,18 +69,16 @@ import {
           <Panel
             title={'Pending rewards'}
 
-            stat={checkEarnings.status}
-            icon={<Claim />}
+            stat={<Claim />}
+            
           />
           <Panel
             title={'Total Rewards Distributed'}
-            stat={'1,000'}
-            icon={<FiServer size={'3em'} />}
+            stat={'Coming Soon'}
           />
           <Panel
             title={'Your Claimed Rewards'}
-            stat={'7'}
-            icon={<GoLocation size={'3em'} />}
+            stat={'Cooming Soon'}
           />
         </SimpleGrid>
       </Box>

@@ -4,6 +4,7 @@ import { Contract } from "@ethersproject/contracts";
 import { useContractFunction, useContractCall } from "@usedapp/core";
 import dividendDistributorAbi from "../abi/dividendDistributor.json";
 import { simpleContractAddress } from "../contracts"
+//import { useWeb3ExecuteFunction } from "react-moralis";
 
 const humanReadableAbi = [
     "constructor(string internalType, string name, string address)",
@@ -20,7 +21,40 @@ const contract = new Contract(simpleContractAddress, dividendDistributorInterfac
 }
 
 export function useCheckEarnings(address : string | false | 0 | null | undefined) {
-  const { state, send } = useContractFunction(contract, "getUnpaidEarnings", {});
-    send({ value: address });
-    return state;
-  }
+
+  // const { data, error, fetch, isFetching, isLoading } = useWeb3ExecuteFunction();
+
+  // const options = {
+  //   abi: dividendDistributorAbi,
+  //   contractAddress: simpleContractAddress,
+  //   functionName: "getUnpaidEarnings",
+  //   params: {
+  //     _address: address
+  //   },
+  // }
+
+  // const ABI = [{
+  //   "constant": true,
+  //   "inputs": [
+  //     {
+  //       "internalType": "address",
+  //       "name": "shareholder",
+  //       "type": "address"
+  //     }
+  //   ],
+  //   "name": "getUnpaidEarnings",
+  //   "outputs": [
+  //     {
+  //       "internalType": "uint256",
+  //       "name": "",
+  //       "type": "uint256"
+  //     }
+  //   ],
+  //   "stateMutability": "view",
+  //   "type": "function"
+  // }];
+
+  // fetch({ params: options });
+  // return JSON.stringify(data);
+  return "coming soon";
+}
