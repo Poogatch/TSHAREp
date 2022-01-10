@@ -4,13 +4,7 @@ import { Contract } from "@ethersproject/contracts";
 import { useContractFunction, useContractCall } from "@usedapp/core";
 import dividendDistributorAbi from "../abi/dividendDistributor.json";
 import { simpleContractAddress } from "../contracts"
-//import { useWeb3ExecuteFunction } from "react-moralis";
-
-const humanReadableAbi = [
-    "constructor(string internalType, string name, string address)",
-    "function claimDividend()",
-    "function getUnpaidEarnings(string address) view returns (uint earnings)"
-  ];
+import { useEffect } from "react";
 
 const dividendDistributorInterface = new ethers.utils.Interface(dividendDistributorAbi);
 const contract = new Contract(simpleContractAddress, dividendDistributorInterface);
@@ -20,41 +14,52 @@ const contract = new Contract(simpleContractAddress, dividendDistributorInterfac
     return { state, send };
 }
 
-export function useCheckEarnings(address : string | false | 0 | null | undefined) {
+export function useCheckEarnings(address: string | null | undefined) {
+  const [pending]: any = useContractCall(address && {
+    abi: dividendDistributorInterface,
+    address: simpleContractAddress,
+    method: "getUnpaidEarnings",
+    args: [address],
+  }) ?? [];
+  return pending;
+}
 
-  // const { data, error, fetch, isFetching, isLoading } = useWeb3ExecuteFunction();
+export function useTotalDistributed() {
+  const [totalDist]: any = useContractCall({
+    abi: dividendDistributorInterface,
+    address: simpleContractAddress,
+    method: "totalDistributed",
+    args: [],
+  }) ?? [];
+  return totalDist;
+}
 
-  // const options = {
-  //   abi: dividendDistributorAbi,
-  //   contractAddress: simpleContractAddress,
-  //   functionName: "getUnpaidEarnings",
-  //   params: {
-  //     _address: address
-  //   },
-  // }
+export function useDividendsPerShare() {
+  const [dpa]: any = useContractCall({
+    abi: dividendDistributorInterface,
+    address: simpleContractAddress,
+    method: "dividendsPerShare",
+    args: [],
+  }) ?? [];
+  return dpa;
+}
 
-  // const ABI = [{
-  //   "constant": true,
-  //   "inputs": [
-  //     {
-  //       "internalType": "address",
-  //       "name": "shareholder",
-  //       "type": "address"
-  //     }
-  //   ],
-  //   "name": "getUnpaidEarnings",
-  //   "outputs": [
-  //     {
-  //       "internalType": "uint256",
-  //       "name": "",
-  //       "type": "uint256"
-  //     }
-  //   ],
-  //   "stateMutability": "view",
-  //   "type": "function"
-  // }];
+export function useDividendsPerShareAccuracyFactor() {
+  const [dpsa]: any = useContractCall({
+    abi: dividendDistributorInterface,
+    address: simpleContractAddress,
+    method: "dividendsPerShareAccuracyFactor",
+    args: [],
+  }) ?? [];
+  return dpsa;
+}
 
-  // fetch({ params: options });
-  // return JSON.stringify(data);
-  return "coming soon";
+export function useShares(address: string | null | undefined) {
+  const [shares]: any[] = useContractCall({
+    abi: dividendDistributorInterface,
+    address: simpleContractAddress,
+    method: "shares",
+    args: [address],
+  }) ?? [];
+  return shares;
 }

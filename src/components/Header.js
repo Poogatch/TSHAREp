@@ -5,13 +5,18 @@ import {
   Heading,
   Flex,
   Text,
-  Button,
+  Image,
   useDisclosure,
   Link
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import ConnectButton from "./ConnectButton";
 import AccountModal from "./AccountModal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChartLine } from '@fortawesome/free-solid-svg-icons'
+import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
+import { faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
+
 
 // Note: This code could be better,
 // so I'd recommend you to understand how I solved and you could write yours better :)
@@ -52,7 +57,10 @@ const Header = (props) => {
         flexGrow={1}
         mt={{ base: 4, md: 0 }}
       >
-        <Link to = "https://dexscreener.com/fantom/0x6f4b0b5f4be32ebc03c02a8f3a0a54fa4270136d">Chart</Link>
+        <Link href="https://dexscreener.com/fantom/0x6f4b0b5f4be32ebc03c02a8f3a0a54fa4270136d" isExternal><FontAwesomeIcon icon={faChartLine} /></Link>
+        <Link href="https://t.me/TSHAREprinter" isExternal><FontAwesomeIcon icon={faTelegramPlane} /></Link>
+        <Link href="https://twitter.com/TsharePrinter" isExternal><FontAwesomeIcon icon={faTwitterSquare} /></Link>
+        
       </Stack>
 
       <Box
